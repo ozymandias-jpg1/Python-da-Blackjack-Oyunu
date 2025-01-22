@@ -1,0 +1,40 @@
+import random
+
+print('Blackjack Oyununa Hoşgeldiniz')
+print('Yirmibir ya da blackjack, şans ve taktiğe dayalı bir iskambil oyunudur. Haydi! başlayın ve şansınızı deneyin!')
+
+bilgisayar_kartları = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Vale', 'Kız', 'Papaz']
+oyuncu_kartları = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Vale', 'Kız', 'Papaz']
+kart_degerleri = {'1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, 'Vale': 10, 'Kız': 10, 'Papaz': 10}
+
+elimizdeki_kartlar = []
+
+while True:
+    cevap = input('Kart Çekmek için "Kart Çek" yazın. Çıkmak için "Oyundan Çık" yazın: ')
+
+    if cevap == 'Kart Çek':
+        random.shuffle(oyuncu_kartları)
+        oyuncu_karti = random.choice(oyuncu_kartları)
+        print('Çektiğiniz Kart:')
+        print(oyuncu_karti)
+        elimizdeki_kartlar.append(oyuncu_karti)
+        
+        toplam = sum(kart_degerleri[kart] for kart in elimizdeki_kartlar)
+        print(f"Elinizdeki Kartların Toplam Değeri: {toplam}")
+
+        if toplam == 21:
+            print('Oyunu kazandınız, tebrikler!')
+            break 
+        elif toplam > 21:
+            print('Kaybettiniz!')
+            break  
+        
+        bilgisayar_karti = random.choice(bilgisayar_kartları)
+        print('Bilgisayarın Çektiği Kart:')
+        print(bilgisayar_karti)
+        
+    elif cevap == 'Oyundan Çık':
+        print('Oyundan Çıkıldı...')
+        break  
+    else:
+        print('Geçersiz komut. Lütfen tekrar deneyin.')
